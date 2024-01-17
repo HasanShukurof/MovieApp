@@ -12,7 +12,7 @@ import com.hasanshukurov.movieapp.view.TvShowFragmentDirections
 import com.squareup.picasso.Picasso
 import javax.inject.Inject
 
-class EpisodeAdapter @Inject constructor(var episodeList: List<EpisodeItem>): RecyclerView.Adapter<EpisodeAdapter.EpisodeHolder>() {
+class EpisodeAdapter(var episodeList: List<EpisodeItem>): RecyclerView.Adapter<EpisodeAdapter.EpisodeHolder>() {
     class EpisodeHolder(val binding:EpisodeRowBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodeHolder {

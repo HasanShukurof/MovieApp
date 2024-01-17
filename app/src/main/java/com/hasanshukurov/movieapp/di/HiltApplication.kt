@@ -1,4 +1,4 @@
-package com.hasanshukurov.movieapp.view
+package com.hasanshukurov.movieapp.di
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

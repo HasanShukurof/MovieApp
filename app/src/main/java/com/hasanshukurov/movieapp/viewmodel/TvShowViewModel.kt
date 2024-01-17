@@ -1,5 +1,6 @@
 package com.hasanshukurov.movieapp.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,24 +21,41 @@ class TvShowViewModel @Inject constructor(val repo: TvShowRepository) : ViewMode
     val episodeList = MutableLiveData<EpisodeResponse>()
 
 
-
-    fun getAllTvShowVM(){
+    fun getAllTvShowVM() {
         viewModelScope.launch(Dispatchers.Main) {
-            tvShowList.value = repo.getAllTvShowRepo()
+            val response = repo.getAllTvShowRepo()
+
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    tvShowList.value = it
+                }
+            }
         }
     }
 
 
-    fun getAllActorsVM(){
-        viewModelScope.launch(Dispatchers.Main) {
-            actorList.value = repo.getAllActorsRepo()
+    fun getAllActorsVM() {
+        viewModelScope.launch {
+            val response = repo.getAllActorsRepo()
+
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    actorList.postValue(it)
+                }
+            }
         }
     }
 
 
-    fun getAllEpisodeVM(){
+    fun getAllEpisodeVM() {
         viewModelScope.launch(Dispatchers.Main) {
-            episodeList.value = repo.getAllEpisodeRepo()
+            val response = repo.getAllEpisodeRepo()
+
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    episodeList.value = it
+                }
+            }
         }
     }
 

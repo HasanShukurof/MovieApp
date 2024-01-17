@@ -25,7 +25,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tv Shows"
+                android:text="Movies"
                 android:textColor="@color/white"
                 android:textSize="25sp"
                 android:textStyle="bold" />
@@ -75,7 +75,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Up Coming "
+                android:text="Episode "
                 android:textColor="@color/white"
                 android:textSize="25sp"
                 android:textStyle="bold" />

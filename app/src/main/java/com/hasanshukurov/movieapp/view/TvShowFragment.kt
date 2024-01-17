@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.RequestManager
 import com.hasanshukurov.movieapp.adapter.ActorAdapter
@@ -19,7 +20,8 @@ import kotlinx.coroutines.*
 @AndroidEntryPoint
 class TvShowFragment : Fragment() {
 
-    private lateinit var binding: FragmentTvShowBinding
+    private var _binding: FragmentTvShowBinding? = null
+    private val binding: FragmentTvShowBinding get() = _binding!!
     private lateinit var viewModel: TvShowViewModel
     private lateinit var movieAdapter: MovieAdapter
     private lateinit var actorAdapter: ActorAdapter
@@ -29,8 +31,7 @@ class TvShowFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val x: TvShowViewModel by viewModels()
-        viewModel = x
+        viewModel = ViewModelProvider(this).get(TvShowViewModel::class.java)
 
     }
 
@@ -38,7 +39,7 @@ class TvShowFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentTvShowBinding.inflate(inflater, container, false)
+        _binding = FragmentTvShowBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -46,9 +47,6 @@ class TvShowFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-
-
-        GlobalScope.launch(Dispatchers.Main) {
             viewModel.tvShowList.observe(viewLifecycleOwner){
 
                 movieAdapter = MovieAdapter(it)
@@ -56,11 +54,11 @@ class TvShowFragment : Fragment() {
                 binding.recyclerView.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
 
             }
-        }
+
         viewModel.getAllTvShowVM()
 
 
-        GlobalScope.launch(Dispatchers.Main) {
+
             viewModel.actorList.observe(viewLifecycleOwner){
 
                 actorAdapter = ActorAdapter(it)
@@ -68,13 +66,11 @@ class TvShowFragment : Fragment() {
                 binding.rvActors.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
 
             }
-        }
+
         viewModel.getAllActorsVM()
 
 
 
-
-        GlobalScope.launch(Dispatchers.Main) {
             viewModel.episodeList.observe(viewLifecycleOwner){
 
                 episodeAdapter = EpisodeAdapter(it)
@@ -82,10 +78,15 @@ class TvShowFragment : Fragment() {
                 binding.rvRecentlyAdded.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
 
             }
-        }
+
         viewModel.getAllEpisodeVM()
 
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }

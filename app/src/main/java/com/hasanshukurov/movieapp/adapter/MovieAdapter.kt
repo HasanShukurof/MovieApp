@@ -10,7 +10,7 @@ import com.hasanshukurov.movieapp.view.TvShowFragmentDirections
 import com.squareup.picasso.Picasso
 import javax.inject.Inject
 
-class MovieAdapter @Inject constructor(var movieList: List<TvShowItem>): RecyclerView.Adapter<MovieAdapter.MovieHolder>() {
+class MovieAdapter(var movieList: List<TvShowItem>): RecyclerView.Adapter<MovieAdapter.MovieHolder>() {
     class MovieHolder(val binding:MovieRowBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieHolder {

@@ -10,7 +10,7 @@ import com.hasanshukurov.movieapp.view.TvShowFragmentDirections
 import com.squareup.picasso.Picasso
 import javax.inject.Inject
 
-class ActorAdapter @Inject constructor(var actorList: List<ActorItem>): RecyclerView.Adapter<ActorAdapter.ActorHolder>() {
+class ActorAdapter (var actorList: List<ActorItem>): RecyclerView.Adapter<ActorAdapter.ActorHolder>() {
     class ActorHolder(val binding:ActorRowBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorHolder {

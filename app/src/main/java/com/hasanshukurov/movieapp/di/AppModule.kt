@@ -9,6 +9,7 @@ import com.hasanshukurov.movieapp.data.service.ApiInterface
 import com.hasanshukurov.movieapp.repo.TvShowRepository
 
 import com.hasanshukurov.movieapp.util.Constant
+import com.hasanshukurov.movieapp.util.Constant.BASE_URL_TvShows
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,7 +27,7 @@ object AppModule {
     @Provides
     fun injectRetrofit() = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl(Constant.BASE_URL_TvShows)
+        .baseUrl(BASE_URL_TvShows)
         .build()
         .create(ApiInterface::class.java)
 

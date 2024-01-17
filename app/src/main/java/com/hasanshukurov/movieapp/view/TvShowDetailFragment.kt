@@ -20,7 +20,8 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class TvShowDetailFragment : Fragment() {
 
-    private lateinit var binding: FragmentTvShowDetailBinding
+    private var _binding: FragmentTvShowDetailBinding? = null
+    private val binding: FragmentTvShowDetailBinding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +34,7 @@ class TvShowDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentTvShowDetailBinding.inflate(inflater,container,false)
+        _binding = FragmentTvShowDetailBinding.inflate(inflater,container,false)
         return binding.root
     }
 
@@ -49,6 +50,11 @@ class TvShowDetailFragment : Fragment() {
             loadUrl(gelenArgs.url)
         }
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }
